@@ -1,3 +1,4 @@
+import 'boxicons';
 import './bootstrap';
 
 import Alpine from 'alpinejs';

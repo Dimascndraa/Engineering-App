@@ -57,7 +57,7 @@
         </script>
     @endif
 
-    @if (session('error'))
+    @if (session()->has('error'))
         <script>
             Swal.fire({
                 icon: 'error',
