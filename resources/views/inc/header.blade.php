@@ -44,8 +44,19 @@
 <link rel="stylesheet" media="screen, print" href="/css/miscellaneous/lightgallery/lightgallery.bundle.css">
 <link rel="stylesheet" media="screen, print" href="/css/page-invoice.css">
 <link rel="stylesheet" media="screen, print" href="/css/theme-demo.css">
+
+{{-- SweetAlert2 --}}
+<link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+
 {{-- SweetAlert2 --}}
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+<style>
+    .bx {
+        transform: scale(1.5);
+        margin-right: 1rem;
+    }
+</style>
 
 {{-- <script src="/js/jspdf.umd.min.js"></script> --}}
 <!-- BEGIN Body -->
