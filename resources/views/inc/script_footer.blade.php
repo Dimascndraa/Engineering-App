@@ -38,6 +38,17 @@ DOC: if you remove pace.js from core please note on Internet Explorer some CSS a
             confirmButtonText: 'OK'
         });
     }
+    $(document).ready(function() {
+        function showLoadingIndicator() {
+            // Show loading indicator
+            $('#overlay').show();
+        }
+
+        function hideLoadingIndicator() {
+            // Hide loading indicator
+            $('#overlay').hide();
+        }
+    });
 </script>
 
 <script src="/js/script.js"></script>

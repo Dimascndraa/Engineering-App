@@ -1,9 +1,11 @@
 <?php
 
 use App\Http\Controllers\Auth\AuthenticatedSessionController;
-use App\Http\Controllers\DepartementController;
+use App\Http\Controllers\Pages\CategoryController;
+use App\Http\Controllers\Pages\DepartementController;
 use App\Http\Controllers\Pages\DashboardController;
 use App\Http\Controllers\Pages\UserController;
+use App\Http\Controllers\Pages\WorkOrderController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
@@ -30,6 +32,13 @@ Route::middleware('auth')->group(function () {
     // Departement
     Route::get("/departements", [DepartementController::class, 'index'])->name("departement.index");
     Route::get('/departements/checkSlug', [DepartementController::class, 'checkSlug']);
+
+    // Category
+    Route::get("/categories", [CategoryController::class, 'index'])->name("category.index");
+    Route::get('/categories/checkSlug', [CategoryController::class, 'checkSlug']);
+
+    // Work-order
+    Route::get("/work-orders", [WorkOrderController::class, 'index'])->name("work-order.index");
 
     // Users
     Route::get("/users", [UserController::class, 'index'])->name("user.index");

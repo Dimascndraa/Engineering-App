@@ -17,7 +17,7 @@ class DepartementSeeder extends Seeder
             [
                 'name' => "Informasi Teknologi",
                 'code' => "IT",
-                'slug' => "it",
+                'slug' => "informasi-tekniologi",
                 'status' => 1
             ]
         ];

@@ -43,4 +43,9 @@ class User extends Authenticatable
     {
         return $this->belongsTo(Departement::class);
     }
+
+    public function workOrder()
+    {
+        return $this->hasMany(WorkOrder::class);
+    }
 }

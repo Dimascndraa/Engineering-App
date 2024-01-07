@@ -52,10 +52,23 @@
                     <span class="nav-link-text" data-i18n="nav.application_departement">Departement</span>
                 </a>
             </li>
+            <li class="{{ set_active('categories') }}">
+                <a href="{{ route('category.index') }}" title="Kategori Work Order"
+                    data-filter-tags="application category">
+                    <i class='bx bxs-category'></i>
+                    <span class="nav-link-text" data-i18n="nav.application_category">Kategori Work Order</span>
+                </a>
+            </li>
             <li class="{{ set_active('users') }}">
                 <a href="{{ route('user.index') }}" title="users" data-filter-tags="application user">
                     <i class='bx bxs-user-account'></i>
                     <span class="nav-link-text" data-i18n="nav.application_user">Users</span>
+                </a>
+            </li>
+            <li class="{{ set_active('work-orders') }}">
+                <a href="{{ route('work-order.index') }}" title="Work Order" data-filter-tags="application work order">
+                    <i class='bx bx-list-plus'></i>
+                    <span class="nav-link-text" data-i18n="nav.application_work_order">Work Order</span>
                 </a>
             </li>
             <li

@@ -1,13 +1,14 @@
 @extends('inc.layout')
-@section('title', 'Departemen')
+@section('title', 'Kategori Work Order')
 @section('content')
     <main id="js-page-content" role="main" class="page-content">
         <div class="row mb-5">
             <div class="col-xl-12">
                 <button type="button" class="btn btn-primary waves-effect waves-themed" data-backdrop="static"
-                    data-keyboard="false" data-toggle="modal" data-target="#tambah-departemen" title="Tambah Departemen">
+                    data-keyboard="false" data-toggle="modal" data-target="#tambah-kategori"
+                    title="Tambah Kategori Work Order">
                     <span class="fal fa-plus-circle mr-1"></span>
-                    Tambah Departemen
+                    Tambah Kategori Work Order
                 </button>
             </div>
         </div>
@@ -17,7 +18,7 @@
                 <div id="panel-1" class="panel">
                     <div class="panel-hdr">
                         <h2>
-                            Table <span class="fw-300"><i>Departemen</i></span>
+                            Table <span class="fw-300"><i>Kategori</i></span>
                         </h2>
                     </div>
                     <div class="panel-container show">
@@ -27,27 +28,28 @@
                                 <thead>
                                     <tr>
                                         <th style="white-space: nowrap">No</th>
-                                        <th style="white-space: nowrap">Nama Departemen</th>
-                                        <th style="white-space: nowrap">Kode</th>
+                                        <th style="white-space: nowrap">Nama Kategori</th>
+                                        <th style="white-space: nowrap">Slug</th>
                                         <th style="white-space: nowrap">Status</th>
                                         <th style="white-space: nowrap">Aksi</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @foreach ($departements as $departement)
+                                    @foreach ($categories as $category)
                                         <tr>
                                             <td style="white-space: nowrap">{{ $loop->iteration }}</td>
-                                            <td style="white-space: nowrap">{{ $departement->name }}</td>
-                                            <td style="white-space: nowrap">{{ $departement->code }}</td>
+                                            <td style="white-space: nowrap">{{ $category->name }}</td>
+                                            <td style="white-space: nowrap">{{ $category->slug }}</td>
                                             <td style="white-space: nowrap">
-                                                {{ $departement->status == 1 ? 'Aktif' : 'Nonaktif' }}
+                                                {{ $category->status == 1 ? 'Aktif' : 'Nonaktif' }}
                                             </td>
+
                                             <td style="white-space: nowrap">
-                                                <!-- Add a data-departement-id attribute to the edit button -->
+                                                <!-- Add a data-category-id attribute to the edit button -->
                                                 <button type="button" data-backdrop="static" data-keyboard="false"
                                                     class="badge mx-1 badge-primary p-2 border-0 text-white edit-button"
-                                                    data-toggle="modal" data-target="#edit-departement" title="Ubah"
-                                                    data-departement-id="{{ $departement->id }}">
+                                                    data-toggle="modal" data-target="#edit-kategori" title="Ubah"
+                                                    data-category-id="{{ $category->id }}">
                                                     <span class="fal fa-pencil"></span>
                                                 </button>
                                             </td>
@@ -57,8 +59,8 @@
                                 <tfoot>
                                     <tr>
                                         <th style="white-space: nowrap">No</th>
-                                        <th style="white-space: nowrap">Nama Departemen</th>
-                                        <th style="white-space: nowrap">Kode</th>
+                                        <th style="white-space: nowrap">Nama Kategori</th>
+                                        <th style="white-space: nowrap">Slug</th>
                                         <th style="white-space: nowrap">Status</th>
                                         <th style="white-space: nowrap">Aksi</th>
                                     </tr>
@@ -66,8 +68,8 @@
                             </table>
                             <!-- datatable end -->
                             <!-- Modal -->
-                            @include('pages.departement.partials.edit-departement')
-                            @include('pages.departement.partials.create-departement')
+                            @include('pages.category.partials.edit-category')
+                            @include('pages.category.partials.create-category')
                         </div>
                     </div>
                 </div>
@@ -83,10 +85,10 @@
             // SELECT2
             $(function() {
                 $('#create-status').select2({
-                    dropdownParent: $('#tambah-departemen')
+                    dropdownParent: $('#tambah-kategori')
                 });
                 $('#edit-status').select2({
-                    dropdownParent: $('#edit-departemen')
+                    dropdownParent: $('#edit-category')
                 });
             });
             // SELECT2
@@ -95,15 +97,15 @@
             $('#create-button').on('click', function() {
                 $.ajax({
                     type: 'POST',
-                    url: '/api/departements',
-                    data: $('#create-departement-form').serialize(),
+                    url: '/api/categories',
+                    data: $('#create-category-form').serialize(),
                     success: function(response) {
                         // Tangani keberhasilan, misalnya, tutup modal atau perbarui UI
-                        $('#tambah-departemen').modal('hide');
-                        // Lakukan sesuatu setelah berhasil, seperti memuat kembali data departemen
+                        $('#tambah-kategori').modal('hide');
+                        // Lakukan sesuatu setelah berhasil, seperti memuat kembali data kategori
 
                         //tampilkan pesan
-                        showSuccessAlert('Departemen Ditambah!');
+                        showSuccessAlert('Kategori Ditambah!');
 
                         // Tunda reload selama 2 detik
                         setTimeout(function() {
@@ -111,42 +113,42 @@
                         }, 1000);
                     },
                     error: function(error) {
-                        $('#tambah-departemen').modal('hide');
+                        $('#tambah-kategori').modal('hide');
                         // Tangani kesalahan, misalnya, tampilkan pesan kesalahan validasi
                         showErrorAlert('Cek kembali data yang dikirim');
                     }
                 });
             });
 
+            // Add the category ID to the modal when the Edit button is clicked
             $('.edit-button').on('click', function() {
-                var departementId = $(this).data('departement-id');
+                var categoryId = $(this).data('category-id');
 
-                // Set the departement ID to the modal input field
-                $('#edit-departement-id').val(departementId);
+                // Set the category ID to the modal input field
+                $('#edit-category-id').val(categoryId);
 
                 // Show loading indicator
                 showLoadingIndicator();
 
-                // Assume you have an endpoint that returns departement data based on the ID
+                // Assume you have an endpoint that returns category data based on the ID
                 $.ajax({
                     type: 'GET',
-                    url: '/api/departements/' + departementId,
+                    url: '/api/categories/' + categoryId,
                     success: function(data) {
                         // Hide loading indicator
                         hideLoadingIndicator();
 
                         // Populate modal fields with data
                         $('#edit-name').val(data.name);
-                        $('#edit-code').val(data.code);
                         $('#edit-slug').val(data.slug);
                         $('#edit-status').val(data.status);
 
                         $('#edit-status').val(data.status).select2({
-                            dropdownParent: $('#edit-departemen')
+                            dropdownParent: $('#edit-category')
                         });
 
-                        // Show the modal
-                        $('#edit-departemen').modal('show');
+                        // Show the modal after data is loaded
+                        $('#edit-category').modal('show');
                     },
                     error: function(error) {
                         // Hide loading indicator
@@ -159,21 +161,21 @@
 
 
             // Submit the form via AJAX
-            $('#update-departement-form').on('submit', function(e) {
+            $('#update-category-form').on('submit', function(e) {
                 e.preventDefault();
 
-                var departementId = $('#edit-departement-id').val();
+                var categoryId = $('#edit-category-id').val();
 
                 $.ajax({
-                    type: 'POST',
-                    url: '/api/departements/' + departementId,
+                    type: 'PUT',
+                    url: '/api/categories/' + categoryId,
                     data: $(this).serialize(),
                     success: function(response) {
                         // Handle success, e.g., close modal or update UI
-                        $('#edit-departemen').modal('hide');
+                        $('#edit-category').modal('hide');
 
                         //tampilkan pesan
-                        showSuccessAlert('Departemen Diubah!');
+                        showSuccessAlert('Kategori Diubah!');
 
                         // Tunda reload selama 2 detik
                         setTimeout(function() {
@@ -181,13 +183,14 @@
                         }, 1000);
                     },
                     error: function(error) {
-                        $('#edit-departemen').modal('hide');
+                        $('#edit-category').modal('hide');
                         // Handle errors, e.g., display validation errors
                         showErrorAlert('Cek kembali data yang dikirim');
                     }
                 });
             });
 
+            // BEGIN SPINNER
             function showLoadingIndicator() {
                 // Show loading indicator
                 $('#overlay').show();
@@ -197,6 +200,7 @@
                 // Hide loading indicator
                 $('#overlay').hide();
             }
+            // END SPINNER
 
             // Datatable initialization
             $('#dt-basic-example').dataTable({
@@ -216,18 +220,17 @@
             // Slugable
             const createtitle = document.querySelector('#create-name');
             const createslug = document.querySelector('#create-slug');
-
             const edittitle = document.querySelector('#edit-name');
             const editslug = document.querySelector('#edit-slug');
 
             createtitle.addEventListener('change', function() {
-                fetch('/departements/checkSlug?name=' + createtitle.value)
+                fetch('/categories/checkSlug?title=' + createtitle.value)
                     .then(response => response.json())
                     .then(data => createslug.value = data.slug)
             });
 
             edittitle.addEventListener('change', function() {
-                fetch('/departements/checkSlug?name=' + edittitle.value)
+                fetch('/categories/checkSlug?title=' + edittitle.value)
                     .then(response => response.json())
                     .then(data => editslug.value = data.slug)
             });
