@@ -26,20 +26,28 @@
                             <table id="dt-basic-example" class="table table-bordered table-hover table-striped w-100">
                                 <thead>
                                     <tr>
-                                        {{-- <th style="white-space: nowrap">Foto</th> --}}
-                                        <th style="white-space: nowrap">Nama User</th>
+                                        <th style="white-space: nowrap">No</th>
+                                        <th style="white-space: nowrap">Departemen</th>
+                                        <th style="white-space: nowrap">Nama</th>
                                         <th style="white-space: nowrap">Username</th>
-                                        <th style="white-space: nowrap">Email</th>
+                                        <th style="white-space: nowrap">Jabatan</th>
+                                        <th style="white-space: nowrap">Role</th>
+                                        <th style="white-space: nowrap">Status</th>
                                         <th style="white-space: nowrap">Aksi</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     @foreach ($users as $user)
                                         <tr>
-                                            {{-- <td style="white-space: nowrap">{{ $user->template_user->foto }}</td> --}}
+                                            <td style="white-space: nowrap">{{ $loop->iteration }}</td>
+                                            <td style="white-space: nowrap">{{ $user->departement->name }}</td>
                                             <td style="white-space: nowrap">{{ $user->name }}</td>
                                             <td style="white-space: nowrap">{{ $user->username }}</td>
-                                            <td style="white-space: nowrap">{{ $user->email }}</td>
+                                            <td style="white-space: nowrap">{{ $user->jabatan }}</td>
+                                            <td style="white-space: nowrap">{{ ucfirst($user->role) }}</td>
+                                            <td style="white-space: nowrap">
+                                                {{ $user->status == 1 ? 'Aktif' : 'Nonaktif' }}
+                                            </td>
 
                                             <td style="white-space: nowrap">
                                                 <button type="button" data-backdrop="static" data-keyboard="false"
@@ -71,11 +79,13 @@
                                 </tbody>
                                 <tfoot>
                                     <tr>
-                                        {{-- <th style="white-space: nowrap">Foto</th> --}}
-                                        <th style="white-space: nowrap">Nama User</th>
+                                        <th style="white-space: nowrap">No</th>
+                                        <th style="white-space: nowrap">Departemen</th>
+                                        <th style="white-space: nowrap">Nama</th>
                                         <th style="white-space: nowrap">Username</th>
-                                        <th style="white-space: nowrap">Email</th>
-                                        <th style="white-space: nowrap">Unit</th>
+                                        <th style="white-space: nowrap">Jabatan</th>
+                                        <th style="white-space: nowrap">Role</th>
+                                        <th style="white-space: nowrap">Status</th>
                                         <th style="white-space: nowrap">Aksi</th>
                                     </tr>
                                 </tfoot>
@@ -97,9 +107,13 @@
         $(document).ready(function() {
 
             @foreach ($users as $u)
-                $('#unitUser{{ $u->id }}').select2({
-                    placeholder: 'Pilih Unit',
-                    dropdownParent: $('#unit{{ $u->id }}'),
+                $('#departement{{ $u->id }}').select2({
+                    placeholder: 'Pilih Departemen',
+                    dropdownParent: $('#ubah-user{{ $u->id }}'),
+                });
+                $('#status{{ $u->id }}').select2({
+                    placeholder: 'Pilih Status',
+                    dropdownParent: $('#ubah-user{{ $u->id }}'),
                 });
                 $('#aksesUser{{ $u->id }}').select2({
                     placeholder: 'Pilih Akses',
@@ -107,8 +121,14 @@
                 });
             @endforeach
 
-            $('#namaUnit').select2({
-                placeholder: 'Pilih Unit',
+            $('#status').select2({
+                placeholder: 'Pilih Status',
+                dropdownParent: $('#tambah-user'),
+            });
+
+            $('#departement').select2({
+                placeholder: 'Pilih Departement',
+                dropdownParent: $('#tambah-user'),
             });
 
             $('#dt-basic-example').dataTable({

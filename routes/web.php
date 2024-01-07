@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Auth\AuthenticatedSessionController;
+use App\Http\Controllers\DepartementController;
 use App\Http\Controllers\Pages\DashboardController;
 use App\Http\Controllers\Pages\UserController;
 use App\Http\Controllers\ProfileController;
@@ -23,12 +24,12 @@ Route::get('/', [AuthenticatedSessionController::class, 'create'])
 Route::post('/', [AuthenticatedSessionController::class, 'store']);
 
 Route::middleware('auth')->group(function () {
-    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
-    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
-    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
-
     // Dashboard
     Route::get("/dashboard", [DashboardController::class, 'index'])->name("dashboard");
+
+    // Departement
+    Route::get("/departements", [DepartementController::class, 'index'])->name("departement.index");
+    Route::get('/departements/checkSlug', [DepartementController::class, 'checkSlug']);
 
     // Users
     Route::get("/users", [UserController::class, 'index'])->name("user.index");

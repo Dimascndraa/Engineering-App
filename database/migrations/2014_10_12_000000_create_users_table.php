@@ -13,11 +13,11 @@ return new class extends Migration
     {
         Schema::create('users', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('departement_id')->constrained('departements')->onUpdate('cascade')->onDelete('cascade');
             $table->string('name');
-            $table->string('email')->unique();
             $table->string('username')->unique();
-            $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
+            $table->string('jabatan');
             $table->string('role')->default('user');
             $table->boolean('status')->default(1);
             $table->rememberToken();

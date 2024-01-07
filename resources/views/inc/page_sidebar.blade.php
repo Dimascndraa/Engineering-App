@@ -45,6 +45,13 @@
                     <span class="nav-link-text" data-i18n="nav.application_dashboard">Dashboard</span>
                 </a>
             </li>
+            <li class="{{ set_active('departements') }}">
+                <a href="{{ route('departement.index') }}" title="departement"
+                    data-filter-tags="application departement">
+                    <i class='bx bxs-landmark'></i>
+                    <span class="nav-link-text" data-i18n="nav.application_departement">Departement</span>
+                </a>
+            </li>
             <li class="{{ set_active('users') }}">
                 <a href="{{ route('user.index') }}" title="users" data-filter-tags="application user">
                     <i class='bx bxs-user-account'></i>
@@ -89,7 +96,8 @@
                                 </a>
                             </li>
                             <li class="{{ set_active('intel_privacy') }}">
-                                <a href="/intel_privacy" title="Privacy" data-filter-tags="application intel privacy">
+                                <a href="/intel_privacy" title="Privacy"
+                                    data-filter-tags="application intel privacy">
                                     <span class="nav-link-text"
                                         data-i18n="nav.application_intel_privacy">Privacy</span>
                                 </a>

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Pages;
 
 use App\Http\Controllers\Controller;
+use App\Models\Departement;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
@@ -11,18 +12,24 @@ class UserController extends Controller
 {
     public function index()
     {
+        $departements = Departement::where('status', 1)->get();
+
         return view('pages.user.index', [
             'users' => User::all(),
+            'departements' => $departements,
         ]);
     }
 
     public function store(Request $request)
     {
         $validatedData = $request->validate([
+            'departement_id' => 'required',
             'name' => 'required',
             'username' => 'required|unique:users',
-            'email' => 'required|email|unique:users',
             'password' => 'required',
+            'jabatan' => 'required',
+            'role' => 'required',
+            'status' => 'required',
         ]);
 
         $validatedData['password'] = Hash::make($request['password']);
@@ -34,9 +41,11 @@ class UserController extends Controller
     public function update(Request $request, $id)
     {
         $validatedData = $request->validate([
+            'departement_id' => 'required',
             'name' => 'required',
             'username' => 'required|unique:users,username,' . $id,
-            'email' => 'required|email|unique:users,email,' . $id,
+            'jabatan' => 'required',
+            'status' => 'required',
         ]);
 
         User::where('id', $id)->update($validatedData);

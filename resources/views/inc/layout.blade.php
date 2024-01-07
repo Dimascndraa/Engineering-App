@@ -26,6 +26,15 @@
                 <!-- this overlay is activated only when mobile menu is triggered -->
                 <div class="page-content-overlay" data-action="toggle" data-class="mobile-nav-on"></div>
                 <!-- END Page Content -->
+
+                {{-- BEGIN Spinner --}}
+                <div id="overlay">
+                    <div class="cv-spinner">
+                        <span class="spinner"></span>
+                    </div>
+                </div>
+                {{-- END Spinner --}}
+
                 <!-- BEGIN Page Footer -->
                 @include('inc.footer')
                 <!-- END Page Footer -->
@@ -66,9 +75,6 @@
             })
         </script>
     @endif
-
-
-
     <!-- END Page Wrapper -->
     <!-- BEGIN Quick Menu -->
     <!-- to add more items, please make sure to change the variable '$menu-items: number;' in your _page-components-shortcut.scss -->

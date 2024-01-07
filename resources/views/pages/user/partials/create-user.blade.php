@@ -12,6 +12,37 @@
                 </div>
                 <div class="modal-body">
                     <div class="form-group">
+                        <label class="form-label" for="status">
+                            Status
+                        </label>
+                        <select class="form-control w-100 @error('status') is-invalid @enderror" id="status"
+                            name="status">
+                            <optgroup label="Status">
+                                <option value="1">Aktif</option>
+                                <option value="0">Nonaktif</option>
+                            </optgroup>
+                        </select>
+                        @error('status')
+                            <div class="invalid-feedback">{{ $message }}</div>
+                        @enderror
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label" for="departement">
+                            Departemen
+                        </label>
+                        <select class="form-control w-100 @error('departement') is-invalid @enderror" id="departement"
+                            name="departement_id">
+                            <optgroup label="Departemen">
+                                @foreach ($departements as $departement)
+                                    <option value="{{ $departement->id }}">{{ $departement->name }}</option>
+                                @endforeach
+                            </optgroup>
+                        </select>
+                        @error('departement')
+                            <div class="invalid-feedback">{{ $message }}</div>
+                        @enderror
+                    </div>
+                    <div class="form-group">
                         <label for="name">Nama</label>
                         <input type="text" value="{{ old('name') }}"
                             class="form-control @error('name') is-invalid @enderror" id="name" name="name"
@@ -30,15 +61,6 @@
                         @enderror
                     </div>
                     <div class="form-group">
-                        <label for="email">Email</label>
-                        <input type="text" value="{{ old('email') }}"
-                            class="form-control @error('email') is-invalid @enderror" id="email" name="email"
-                            placeholder="Username">
-                        @error('email')
-                            <div class="invalid-feedback">{{ $message }}</div>
-                        @enderror
-                    </div>
-                    <div class="form-group">
                         <label for="password">Password</label>
                         <input type="password" value="{{ old('password') }}"
                             class="form-control @error('password') is-invalid @enderror" id="password" name="password"
@@ -47,6 +69,26 @@
                             <div class="invalid-feedback">{{ $message }}</div>
                         @enderror
                     </div>
+                    <div class="form-group">
+                        <label for="jabatan">Jabatan</label>
+                        <input type="text" value="{{ old('jabatan') }}"
+                            class="form-control @error('jabatan') is-invalid @enderror" id="jabatan" name="jabatan"
+                            placeholder="Jabatan">
+                        @error('jabatan')
+                            <div class="invalid-feedback">{{ $message }}</div>
+                        @enderror
+                    </div>
+                    {{-- !! ROLE !! --}}
+                    <div class="form-group">
+                        <label for="role">Role</label>
+                        <input type="text" value="{{ old('role') }}"
+                            class="form-control @error('role') is-invalid @enderror" id="role" name="role"
+                            placeholder="Role">
+                        @error('role')
+                            <div class="invalid-feedback">{{ $message }}</div>
+                        @enderror
+                    </div>
+                    {{-- !! ROLE !! --}}
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
