@@ -38,6 +38,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/categories/checkSlug', [CategoryController::class, 'checkSlug']);
 
     // Work-order
+    // Route::get("/work-orders", [WorkOrderController::class, 'index'])->name("work-order.index")->middleware('role:admin');
     Route::get("/work-orders", [WorkOrderController::class, 'index'])->name("work-order.index");
 
     // Users
